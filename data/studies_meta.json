@@ -1,0 +1,38 @@
+[
+  {
+    "study_id": "ada_2024",
+    "title": "American Diabetes Association Standards of Care in Diabetes 2024",
+    "year": 2024,
+    "condition": "diabetes mellitus",
+    "intervention": "clinical practice guideline (ADA Standards of Care)",
+    "comparator": null,
+    "primary_outcome": null,
+    "sample_size": null,
+    "source_type": "guideline",
+    "filename": "ada_2024_soc.pdf"
+  },
+  {
+    "study_id": "kdigo_2024_ckd",
+    "title": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+    "year": 2024,
+    "condition": "chronic kidney disease",
+    "intervention": "clinical practice guideline (KDIGO CKD)",
+    "comparator": null,
+    "primary_outcome": null,
+    "sample_size": null,
+    "source_type": "guideline",
+    "filename": "kdigo_2024_ckd.pdf"
+  },
+  {
+    "study_id": "gold_2024",
+    "title": "GOLD 2024 Global Strategy for the Diagnosis, Management, and Prevention of COPD",
+    "year": 2024,
+    "condition": "chronic obstructive pulmonary disease",
+    "intervention": "clinical practice guideline (GOLD COPD)",
+    "comparator": null,
+    "primary_outcome": null,
+    "sample_size": null,
+    "source_type": "guideline",
+    "filename": "gold_2024_copd.pdf"
+  }
+]
