@@ -18,6 +18,16 @@ from config import(
     CHUNK_SIZE,
     CHUNK_OVERLAP,
 )
+def clean(text: str) -> str:
+   
+    text = text.replace("-\n", "")
+
+    text = text.replace("\n", " ")
+
+    import re
+    text = re.sub(r"\s+", " ", text)
+
+    return text
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -29,7 +39,7 @@ def extract_text_from_pdf(pdf_path):
 
     doc.close()
     full_text="\n\n".join(texts)
-    return full_text
+    return clean(full_text)
 
 def load_studies_meta():
     if not STUDIES_META_PATH.exists():
@@ -102,7 +112,7 @@ def ingest():
     print("saving to chroma vector to store ")
     vectorstore = Chroma.from_documents(
         documents=splitted_docs,
-        embeddings=HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL),
+        embedding=HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL),
         persist_directory=str(CHROMA_DIR),
         collection_name=CHROMA_COLLECTION_NAME,
 
@@ -110,5 +120,5 @@ def ingest():
     vectorstore.persist()
     print(f"Vector store at {CHROMA_DIR}")
 
-    if __name__=="__main__":
-        ingest()
+if __name__=="__main__":
+    ingest()
