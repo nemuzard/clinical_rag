@@ -9,7 +9,7 @@ RAW_DIR = DATA_DIR/"raw"
 
 STUDIES_META_PATH = DATA_DIR/"studies_meta.json"
 
-CHROMA_DIR = BASE_DIR/"chrome_db"
+CHROMA_DIR = BASE_DIR/"chroma_db"
 
 CHROMA_COLLECTION_NAME = "clinical_evidence"
 
