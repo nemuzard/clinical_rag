@@ -95,7 +95,8 @@ class RAG:
 			year = meta.get("year","Unknown year")
 			study_id = meta.get("study_id","N/A")
 			condition = meta.get("condition","")
-			header =  f"[{i}] {study_id} | {title} ({year}) | {condition}"
+			page = meta.get("page","N/A")
+			header =  f"[{i}] {study_id} | {title} ({year}) | p.{page}|{condition}"
 			content = d.page_content
 			chunks.append(f"{header}\n{content}")
 		return "\n\n---\n\n".join(chunks)
@@ -125,6 +126,7 @@ class RAG:
         			"condition":meta.get("condition"),
         			"source_type":meta.get("source_type"),
         			"source_file":meta.get("source_file"),
+        			"page":meta.get("page"),
         		}
         	)
 		if self.llm_backend!="ollama":
@@ -156,7 +158,7 @@ if __name__ == "__main__":
     print(result.get("answer"))
     print("\n=== Sources ===")
     for s in result["sources"]:
-        print(f"- {s['study_id']}: {s['title']} ({s['year']}) | {s['condition']}")
+        print(f"- {s['study_id']}: {s['title']} ({s['year']}) p.{s['page']}| {s['condition']}")
 
     if "raw_context" in result:
         print("\n=== Raw Context (truncated) ===")
