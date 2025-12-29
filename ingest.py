@@ -31,15 +31,16 @@ def clean(text: str) -> str:
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
-    texts = []
-
-    for page in doc:
-        page_text = page.get_text("text")
-        texts.append(page_text)
-
+    # return page number
+    pages = []
+    for i, p in enumerate(doc,start = 1):
+        ptext = p.get_text("text")
+        cleaned  = clean(ptext)
+        if cleaned.strip():
+            pages.append((i,cleaned))
     doc.close()
-    full_text="\n\n".join(texts)
-    return clean(full_text)
+    return pages
+
 
 def load_studies_meta():
     if not STUDIES_META_PATH.exists():
@@ -64,24 +65,25 @@ def build_docs(meta_list):
 
         if filepath.suffix.lower()!=".pdf":
             raise ValueError("PDF required")
-        text = extract_text_from_pdf(filepath)
-
-        doc = Document(
-                page_content = text,
-                metadata = {
-                "study_id":meta.get("study_id"),
-                "title":meta.get("title"),
-                "year":meta.get("year"),
-                "condition":meta.get("condition"),
-                "intervention":meta.get("intervention"),
-                "comparator":meta.get("comparator"),
-                "primary_outcome":meta.get("primary_outcome"),
-                "sample_size":meta.get("sample_size"),
-                "source_file":str(filepath),
-                "source_type":meta.get("source_type","guideline")
-            },
-        )
-        documents.append(doc)
+        pages = extract_text_from_pdf(filepath)
+        for pnum ,text in pages:
+            doc = Document(
+                    page_content = text,
+                    metadata = {
+                    "study_id":meta.get("study_id"),
+                    "title":meta.get("title"),
+                    "year":meta.get("year"),
+                    "condition":meta.get("condition"),
+                    "intervention":meta.get("intervention"),
+                    "comparator":meta.get("comparator"),
+                    "primary_outcome":meta.get("primary_outcome"),
+                    "sample_size":meta.get("sample_size"),
+                    "source_file":str(filepath),
+                    "source_type":meta.get("source_type","guideline"),
+                    "page":pnum,
+                },
+            )
+            documents.append(doc)
     return documents
 
 def split_documents(documents):
