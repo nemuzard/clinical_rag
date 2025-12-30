@@ -1,0 +1,23 @@
+[
+  {
+    "id": "kdigo_cga",
+    "question": "According to KDIGO 2024, how is CKD classified (CGA)?",
+    "expected_study_id": "kdigo_2024_ckd",
+    "expected_pages": [12, 13],
+    "expect_abstain": false
+  },
+  {
+    "id": "gold_abe",
+    "question": "According to GOLD 2024, what is the ABE assessment framework for COPD?",
+    "expected_study_id": "gold_2024",
+    "expected_pages": [20, 21],
+    "expect_abstain": false
+  },
+  {
+    "id": "neg_js_event_loop",
+    "question": "Explain the JavaScript event loop.",
+    "expected_study_id": null,
+    "expected_pages": null,
+    "expect_abstain": true
+  }
+]
